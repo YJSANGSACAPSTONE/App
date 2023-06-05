@@ -7,6 +7,7 @@ import ChallengeAll from './pages/ChallengeAll';
 import ChallengeRead from './pages/ChallengeRead';
 import ChallengeSignUp from './pages/ChallengeSignUp';
 import MyChallenge from './pages/MyChallenge';
+import ChallengeWrite from "./pages/ChallengeWrite";
 
 export default function App() {
   const [user, setUser] = useState("");
@@ -23,6 +24,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="ChallengeAll" component={ChallengeAll} />
+        <Stack.Screen name="ChallengeWrite" component={ChallengeWrite} />
         <Stack.Screen name="ChallengeRead" component={ChallengeRead} />
         <Stack.Screen name="ChallengeSignUp" component={ChallengeSignUp} />
         <Stack.Screen name="MyChallenge" component={MyChallenge} />

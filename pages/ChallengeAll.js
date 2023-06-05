@@ -23,6 +23,10 @@ function ChallengeAll({ navigation }) {
     navigation.navigate('ChallengeRead');
   };
 
+  const handleToChallengeWrite = () => { 
+    navigation.navigate('ChallengeWrite');
+}
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -60,6 +64,9 @@ function ChallengeAll({ navigation }) {
           </View>
         </View>
       </ScrollView>
+      <TouchableOpacity style={styles.button} onPress={handleToChallengeWrite}>
+          <Text style={styles.buttonText}>새로운 챌린지 작성</Text>
+      </TouchableOpacity>
     </View>
   );
 }
