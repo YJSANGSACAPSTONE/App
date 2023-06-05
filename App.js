@@ -7,7 +7,11 @@ import ChallengeAll from './pages/ChallengeAll';
 import ChallengeRead from './pages/ChallengeRead';
 import ChallengeSignUp from './pages/ChallengeSignUp';
 import MyChallenge from './pages/MyChallenge';
+<<<<<<< Updated upstream
 import ChallengeWrite from "./pages/ChallengeWrite";
+=======
+import ChallengeVerify from './pages/ChallengeVerify';
+>>>>>>> Stashed changes
 
 export default function App() {
   const [user, setUser] = useState("");
@@ -27,6 +31,7 @@ export default function App() {
         <Stack.Screen name="ChallengeWrite" component={ChallengeWrite} />
         <Stack.Screen name="ChallengeRead" component={ChallengeRead} />
         <Stack.Screen name="ChallengeSignUp" component={ChallengeSignUp} />
+        <Stack.Screen name="ChallengeVerify" component={ChallengeVerify} />
         <Stack.Screen name="MyChallenge" component={MyChallenge} />
       </Stack.Navigator>
     </NavigationContainer>
