@@ -1,31 +1,38 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { fetchChallengeList } from './api/apis';
+import Axios from 'axios';
 
-function ChallengeAll({ navigation }) {
-// 더미 데이터 예시
-  const popularChallenges = [
-    { id: 1, title: '인기 챌린지 1' },
-    { id: 2, title: '인기 챌린지 2' },
-    { id: 3, title: '인기 챌린지 3' },
-    { id: 4, title: '인기 챌린지 4' },
-    { id: 5, title: '인기 챌린지 5' },
-  ];
+function ChallengeAll() {
+  const navigation = useNavigation();
 
-  const newChallenges = [
-    { id: 1, title: '신규 챌린지 1' },
-    { id: 2, title: '신규 챌린지 2' },
-    { id: 3, title: '신규 챌린지 3' },
-    { id: 4, title: '신규 챌린지 4' },
-    { id: 5, title: '신규 챌린지 5' },
-  ];
+  const [popularChallenges, setPopularChallenges] = useState([]);
+  const [newChallenges, setNewChallenges] = useState([]);
+  const [myChallenges, setMyChallenges] = useState([]);
+
+  useEffect(() => {
+    const fetchChallenges = async () => {
+      try {
+        const response = await fetchChallengeList();
+        setPopularChallenges(response.popularlist);
+        setNewChallenges(response.recentlist);
+        setMyChallenges(response.mylist);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchChallenges();
+  }, []);
+
   const handleClick = () => {
     navigation.navigate('ChallengeRead');
   };
 
-  const handleToChallengeWrite = () => { 
+  const handleToChallengeWrite = () => {
     navigation.navigate('ChallengeWrite');
-}
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +46,7 @@ function ChallengeAll({ navigation }) {
           </View>
           <View style={styles.challengeContainer}>
             {/* 인기 챌린지 목록 */}
-            {popularChallenges.map(challenge => (
+            {popularChallenges.map((challenge) => (
               <TouchableOpacity onPress={handleClick} style={styles.challengeItem} key={challenge.id}>
                 <View>
                   <Text style={styles.challengeItemText}>{challenge.title}</Text>
@@ -54,7 +61,7 @@ function ChallengeAll({ navigation }) {
           </View>
           <View style={styles.challengeContainer}>
             {/* 신규 챌린지 목록 */}
-            {newChallenges.map(challenge => (
+            {newChallenges.map((challenge) => (
               <TouchableOpacity style={styles.challengeItem} key={challenge.id} onPress={handleClick}>
                 <View>
                   <Text style={styles.challengeItemText}>{challenge.title}</Text>
@@ -65,12 +72,11 @@ function ChallengeAll({ navigation }) {
         </View>
       </ScrollView>
       <TouchableOpacity style={styles.button} onPress={handleToChallengeWrite}>
-          <Text style={styles.buttonText}>새로운 챌린지 작성</Text>
+        <Text style={styles.buttonText}>새로운 챌린지 작성</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -114,6 +120,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     // 챌린지 아이템 텍스트 스타일링
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
