@@ -7,38 +7,24 @@ import Axios from 'axios';
 function ChallengeAll() {
   const navigation = useNavigation();
 
-  // const [popularChallenges, setPopularChallenges] = useState([]);
-  // const [newChallenges, setNewChallenges] = useState([]);
+  const [popularChallenges, setPopularChallenges] = useState([]);
+  const [newChallenges, setNewChallenges] = useState([]);
   const [myChallenges, setMyChallenges] = useState([]);
-  const popularChallenges = [
-    { id: 1, title: '인기 챌린지 1' },
-    { id: 2, title: '인기 챌린지 2' },
-    { id: 3, title: '인기 챌린지 3' },
-    { id: 4, title: '인기 챌린지 4' },
-    { id: 5, title: '인기 챌린지 5' },
-  ];
 
-  const newChallenges = [
-    { id: 1, title: '신규 챌린지 1' },
-    { id: 2, title: '신규 챌린지 2' },
-    { id: 3, title: '신규 챌린지 3' },
-    { id: 4, title: '신규 챌린지 4' },
-    { id: 5, title: '신규 챌린지 5' },
-  ];
+
   useEffect(() => {
-    // const fetchChallenges = async () => {
-    //   try {
-    //     const response = await fetchChallengeList();
-    //     setPopularChallenges(response.popularlist);
-    //     setNewChallenges(response.recentlist);
-    //     setMyChallenges(response.mylist);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
+    const fetchChallenges = async () => {
+      try {
+        const response = await fetchChallengeList();
+        setPopularChallenges(response.popularlist);
+        setNewChallenges(response.recentlist);
+        setMyChallenges(response.mylist);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    // fetchChallenges();
-
+    fetchChallenges();
     
   }, []);
 
