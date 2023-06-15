@@ -9,6 +9,11 @@ import ChallengeSignUp from './pages/ChallengeSignUp';
 import MyChallenge from './pages/MyChallenge';
 import ChallengeWrite from "./pages/ChallengeWrite";
 import ChallengeVerify from './pages/ChallengeVerify';
+import Profile from "./pages/Profile";
+import Point from "./pages/Point";
+import ZepVerify from "./pages/ZepVerify";
+
+
 
 export default function App() {
   const [user, setUser] = useState("");
@@ -23,6 +28,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="ZepVerify" component={ZepVerify}/>
+        <Stack.Screen name="Point" component={Point} />
+        <Stack.Screen name="Profile" component={Profile} />
+
+        
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="ChallengeAll" component={ChallengeAll} />
         <Stack.Screen name="ChallengeWrite" component={ChallengeWrite} />

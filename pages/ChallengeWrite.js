@@ -1,61 +1,118 @@
-import React from 'react';
-import { View, TextInput, Button, StyleSheet, CheckBox, Text, ScrollView } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, TextInput, Button, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+// import CheckBox from '@react-native-community/checkbox';
+// import DatePicker from 'react-native-datepicker';
+import CheckBox from 'expo-checkbox';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 const ChallengeWrite = () => {
+
+  const [isChecked, setChecked] = useState(false);
+  const [isCheckeds, setCheckeds] = useState(false);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [showStartDatePicker, setShowStartDatePicker] = useState(false);
+  const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+
+  const handleStartDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || startDate;
+    setShowStartDatePicker(false);
+    setStartDate(currentDate);
+  };
+
+  const handleEndDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || endDate;
+    setShowEndDatePicker(false);
+    setEndDate(currentDate);
+  };
+
+  const showStartDatePickerModal = () => {
+    setShowStartDatePicker(true);
+  };
+
+  const showEndDatePickerModal = () => {
+    setShowEndDatePicker(true);
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.topView}>
-      <Text style={styles.challengeText}>챌린지 명:</Text>
-      {/* <TextInput style={styles.input} /> */}
 
+      <View style={styles.topView}>
+        <Text style={styles.challengeText}>챌린지 명: 미라클 모닝</Text>
       </View>
+
       <View style={styles.middleView}>
-        <Text>참가 인원:</Text>
+        <Text>참가 인원: </Text>
         <TextInput style={styles.input} />
-        <Text>시작일 종요일:</Text>
-        {/* 날짜 선택을 위한 DatePicker 등을 사용하세요 */}
-      </View>
-      
-        <Text>카테고리:</Text>
+
+        {/* <Text>시작일:</Text> */}
+        <TouchableOpacity onPress={showStartDatePickerModal}>
+        <Text>시작일 선택하기</Text>
+        </TouchableOpacity>
+        <Text>{startDate.toDateString()}</Text>
+        {/* <Text>{startDate}</Text> */}
+        {showStartDatePicker && (
+          <DateTimePicker
+            value={startDate}
+            mode="date"
+            display="default"
+            onChange={handleStartDateChange}
+          />
+        )}
+        
+        {/* <Text>종료일:</Text> */}
+        <TouchableOpacity onPress={showEndDatePickerModal}>
+        <Text>종료일 선택하기</Text>
+        </TouchableOpacity>
+        <Text>{endDate.toDateString()}</Text>
+        {showEndDatePicker && (
+          <DateTimePicker
+            value={endDate}
+            mode="date"
+            display="default"
+            onChange={handleEndDateChange}
+          />
+        )}
+
+        <Text>카테고리: </Text>
         <TextInput style={styles.input} />
         <Text>참가금:</Text>
         <TextInput style={styles.input} />
-        <Text>필수 등록 사진 개수:</Text>
+        <Text>필요 등록 사진 개수:</Text>
         <TextInput style={styles.input} />
-        <Text>인증 타입:</Text>
-        <View style={styles.checkboxContainer}>
-          {/* <CheckBox />
-          <Text>사진</Text>
-          <CheckBox />
-          <Text>메타버스</Text>
-        </View>
-        <Text>빈도 타입:</Text>
-        <View style={styles.checkboxContainer}>
-          <CheckBox />
-          <Text>하루에 N번</Text>
-          <CheckBox /> */}
-          <Text>N일에 한번</Text>
-        </View>
+
+        <Text>인증 타입:   
+        <Text>사진</Text>
+        <CheckBox style={styles.checkbox} value={!isChecked} onValueChange={setChecked} color={'#4630EB'} />
+        <Text>메타버스</Text>
+        <CheckBox style={styles.checkbox} value={isChecked} onValueChange={setChecked} color={'#4630EB'} />
+        </Text>
+
+        <Text>빈도 타입: 
+        <Text>하루에 N번</Text>
+        <CheckBox style={styles.checkbox} value={!isCheckeds} onValueChange={setCheckeds} color={'#4630EB'}  />
+        <Text>N일에 한번</Text>
+        <CheckBox style={styles.checkbox} value={isCheckeds} onValueChange={setCheckeds} color={'#4630EB'}  />
+        </Text>
+
         <Text>빈도:</Text>
         <TextInput style={styles.input} />
         <Text>성공점수:</Text>
         <TextInput style={styles.input} />
-        <Text>빈도:</Text>
-        <TextInput style={styles.input} />
-        <Text>성공점수:</Text>
-        <TextInput style={styles.input} />
-        <Text>빈도:</Text>
-        <TextInput style={styles.input} />
-        <Text>성공점수:</Text>
-        <TextInput style={styles.input} />
-      
+
+      </View>
+
       <View style={styles.bottomView}>
+          <Button style={styles.button} title="사진 선택하러 가기" onPress={() => {}} />
+      </View>
+
       <View style={styles.buttonView}>
-        <Button style={styles.button} title="사진 선택하러 가기" onPress={() => {}} />
         <Button style={styles.button} title="개설하기" onPress={() => {}} />
       </View>
-      </View>
-      </ScrollView>
+
+    </ScrollView>
   );
 };
 
@@ -63,17 +120,15 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 10,
-    // justifyContent: 'center',
     justifyContent: 'flex-start',
   },
   topView: {
     flex: 1,
     justifyContent: 'flex-start',
-    // marginBottom: 10,
-    margin : 30,
+    margin: 30,
   },
   challengeText: {
-    fontSize: 30, // 원하는 크기로 설정
+    fontSize: 20,
   },
   middleView: {
     flex: 2,
@@ -88,11 +143,10 @@ const styles = StyleSheet.create({
   buttonView: {
     flex: 1,
     justifyContent: 'flex-end',
-    // marginBottom: 10,
   },
-
   input: {
     height: 40,
+    width: '50%', 
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,

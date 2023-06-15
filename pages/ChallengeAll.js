@@ -64,9 +64,12 @@ function ChallengeAll({ navigation }) {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.button} onPress={handleToChallengeWrite}>
-          <Text style={styles.buttonText}>새로운 챌린지 작성</Text>
-      </TouchableOpacity>
+
+      <View style={styles.buttom}>
+        <TouchableOpacity style={styles.button} onPress={handleToChallengeWrite}>
+            <Text style={styles.buttonText}>새로운 챌린지 작성</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -84,6 +87,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+  buttom: {
+    height: 50,
+  },
+
   categoryContainer: {
     marginBottom: 10,
   },
@@ -115,6 +122,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     // 챌린지 아이템 텍스트 스타일링
   },
+  buttonText: {
+    fontSize: 20, // set the desired font size
+    // additional text styles if needed
+  },
+
 });
 
 export default ChallengeAll;
