@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal, TimePickerAndroid, Platform } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Modal, TimePickerAndroid, Platform } from 'react-native';
 
 export default function SchedulePopup({ visible, onClose, onSave }) {
   const [task, setTask] = useState('');

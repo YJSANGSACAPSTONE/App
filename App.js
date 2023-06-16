@@ -12,6 +12,8 @@ import ChallengeVerify from './pages/ChallengeVerify';
 import Profile from "./pages/Profile";
 import Point from "./pages/Point";
 import ZepVerify from "./pages/ZepVerify";
+import PointPayList from "./pages/PointPayList";
+import PayList from "./pages/PayList";
 
 
 
@@ -28,6 +30,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
+        <Stack.Screen name="PayList" component={PayList}/>
+        <Stack.Screen name="PointPayList" component={PointPayList}/>
         <Stack.Screen name="ZepVerify" component={ZepVerify}/>
         <Stack.Screen name="Point" component={Point} />
         <Stack.Screen name="Profile" component={Profile} />

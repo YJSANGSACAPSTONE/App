@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { fetchChallengeList } from './api/apis';
-import Axios from 'axios';
+// import { fetchChallengeList } from './api/apis';
+// import Axios from 'axios';
 
 function ChallengeAll() {
   const navigation = useNavigation();
