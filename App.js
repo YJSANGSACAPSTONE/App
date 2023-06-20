@@ -14,6 +14,7 @@ import Point from "./pages/Point";
 import ZepVerify from "./pages/ZepVerify";
 import PointPayList from "./pages/PointPayList";
 import PayList from "./pages/PayList";
+import api from "./pages/api/api"
 
 
 
@@ -30,7 +31,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
+        
+        <Stack.Screen name="api" component={api}/>
         <Stack.Screen name="PayList" component={PayList}/>
         <Stack.Screen name="PointPayList" component={PointPayList}/>
         <Stack.Screen name="ZepVerify" component={ZepVerify}/>
